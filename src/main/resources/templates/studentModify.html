@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학생 수정</title>
+</head>
+<body>
+<form method="post" th:action="@{/student/{id}/modify(id=${student.id})}" th:object="${student}">
+  아이디: <input type="text" th:field="*{id}" readonly/><br/>
+  비밀번호: <input type="password" th:field="*{password}" required/><br/>
+  이름: <input type="text" th:field="*{name}" required/><br/>
+  이메일: <input type="email" th:field="*{email}" required/><br/>
+  성적: <input type="number" th:field="*{score}" required/><br/>
+  평가: <textarea th:field="*{comment}" rows="4" cols="50"></textarea><br/>
+  <button type="submit">수정 완료</button>
+</form>
+
+</body>
+</html>

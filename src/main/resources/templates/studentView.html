@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h2>학생 정보 조회</h2>
+  <p><strong>아이디:</strong> <span th:text="${student.id}"></span></p>
+  <p><strong>비밀번호:</strong> <span th:text="${student.maskedPassword}"></span></p>
+  <p><strong>이름:</strong> <span th:text="${student.name}"></span></p>
+  <p><strong>이메일:</strong> <span th:text="${student.email}"></span></p>
+
+  <div th:if="${hideScore != true}">
+    <p><strong>성적:</strong> <span th:text="${student.score}"></span></p>
+    <p><strong>평가:</strong> <span th:text="${student.comment}"></span></p>
+  </div>
+
+  <a th:href="@{/student/{id}/modify(id=${student.id})}">정보 수정</a>
+</body>
+</html>

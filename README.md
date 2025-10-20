@@ -1,4 +1,4 @@
-# 브렌치명 양식에 맞춰서 작성해주세요
+# 브렌치명 양식
 - feature/JBGW12-000
   - feature -> o
   - faeture -> x

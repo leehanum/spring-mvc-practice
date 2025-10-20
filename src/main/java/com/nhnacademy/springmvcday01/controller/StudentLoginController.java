@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Objects;
+
 @Controller
 public class StudentLoginController {
     private StudentRepository studentRepository;
@@ -24,14 +26,14 @@ public class StudentLoginController {
         this.studentRepository = studentRepository;
     }
     @GetMapping("/login")
-    public String login(@CookieValue(value = "SESSION", required = false) String session,
-                        Model model){
-        if(session != null){
-            model.addAttribute("id",session);
-            return "loginSuccess";
-        } else {
-            return "loginForm";
+    public String login(@CookieValue(value = "SESSION", required = false) String sessionId,
+                        Model model) {
+        if (Objects.nonNull(sessionId) && studentRepository.exists(sessionId)) {
+
+            model.addAttribute("student",studentRepository.getStudent(sessionId));
+            return "studentView";
         }
+        return "loginForm";
     }
 
     @PostMapping("/login") // ModelMap 사용

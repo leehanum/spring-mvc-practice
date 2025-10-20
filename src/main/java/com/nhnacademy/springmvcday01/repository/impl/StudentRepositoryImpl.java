@@ -19,7 +19,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public boolean exists(String id) {
-        return false;
+        return studentMap.containsKey(id);
     }
 
     @Override

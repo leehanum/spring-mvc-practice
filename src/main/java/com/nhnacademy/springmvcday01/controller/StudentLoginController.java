@@ -26,35 +26,40 @@ public class StudentLoginController {
         this.studentRepository = studentRepository;
     }
     @GetMapping("/login")
-    public String login(@CookieValue(value = "SESSION", required = false) String sessionId,
-                        Model model) {
-        if (Objects.nonNull(sessionId) && studentRepository.exists(sessionId)) {
+    public String login(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
 
-            model.addAttribute("student",studentRepository.getStudent(sessionId));
-            return "studentView";
+        if (Objects.nonNull(session)) {
+            String studentId = (String) session.getAttribute("studentId");
+
+            if (Objects.nonNull(studentId) && studentRepository.exists(studentId)) {
+                model.addAttribute("student", studentRepository.getStudent(studentId));
+                return "studentView";
+            }
         }
+
         return "loginForm";
     }
 
-    @PostMapping("/login") // ModelMap 사용
+    @PostMapping("/login")
     public String doLogin(@RequestParam(name = "id") String id,
                           @RequestParam(name = "pwd") String pwd,
                           HttpServletRequest request,
                           HttpServletResponse response,
                           ModelMap modelMap){
 
-        if(studentRepository.matches(id,pwd)){
+        if(studentRepository.matches(id, pwd)){
             HttpSession session = request.getSession(true);
+
+            // 세션에 학생 ID 저장 (이 부분이 빠져있었습니다!)
+            session.setAttribute("studentId", id);
 
             Cookie cookie = new Cookie("SESSION", session.getId());
             response.addCookie(cookie);
 
-            modelMap.put("id",session.getId());
             return "redirect:/student/" + id;
-        } else{
+        } else {
             return "redirect:/login";
         }
-
-
     }
 }

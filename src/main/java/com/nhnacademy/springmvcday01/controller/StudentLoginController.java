@@ -29,6 +29,7 @@ public class StudentLoginController {
 
         if (Objects.nonNull(session)) {
             String studentId = (String) session.getAttribute("studentId");
+//            System.out.println(studentId);
 
             if (Objects.nonNull(studentId) && studentRepository.exists(studentId)) {
                 model.addAttribute("student", studentRepository.getStudent(studentId));
@@ -46,12 +47,12 @@ public class StudentLoginController {
                           HttpServletResponse response){
 
         if(studentRepository.matches(id, pwd)){
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession(true); // 1. 세션 생성
 
-            session.setAttribute("studentId", id);
+            session.setAttribute("studentId", id); // 2. 세션에 학생 ID를 저장
 
-            Cookie cookie = new Cookie("SESSION", session.getId());
-            response.addCookie(cookie);
+            Cookie cookie = new Cookie("SESSION", session.getId());// SESSION 이라는 쿠키 이름과, session.getId() 를 저장
+            response.addCookie(cookie); // 응답 요청에 위 쿠키를 추가
 
             return "redirect:/student/" + id;
         } else {

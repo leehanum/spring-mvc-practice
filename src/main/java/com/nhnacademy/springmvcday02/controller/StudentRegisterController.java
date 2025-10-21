@@ -1,11 +1,14 @@
-package com.nhnacademy.springmvcday01.controller;
+package com.nhnacademy.springmvcday02.controller;
 
-import com.nhnacademy.springmvcday01.domain.Student;
-import com.nhnacademy.springmvcday01.repository.StudentRepository;
+import com.nhnacademy.springmvcday02.domain.Student;
+import com.nhnacademy.springmvcday02.exception.ValidationFailedException;
+import com.nhnacademy.springmvcday02.repository.StudentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,7 +48,11 @@ public class StudentRegisterController {
     }
 
     @PostMapping
-    public String register(@ModelAttribute Student student){
+    public String register(@Valid @ModelAttribute Student student,
+                           BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new ValidationFailedException(bindingResult);
+        }
         studentRepository.save(student);
         return "redirect:/student/" +student.getId();
 

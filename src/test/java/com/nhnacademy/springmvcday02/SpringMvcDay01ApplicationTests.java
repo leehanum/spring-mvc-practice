@@ -1,4 +1,4 @@
-package com.nhnacademy.springmvcday01;
+package com.nhnacademy.springmvcday02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

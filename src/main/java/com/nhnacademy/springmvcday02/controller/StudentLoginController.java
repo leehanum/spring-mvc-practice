@@ -1,7 +1,7 @@
-package com.nhnacademy.springmvcday01.controller;
+package com.nhnacademy.springmvcday02.controller;
 
 
-import com.nhnacademy.springmvcday01.repository.StudentRepository;
+import com.nhnacademy.springmvcday02.repository.StudentRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

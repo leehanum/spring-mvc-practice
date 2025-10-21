@@ -1,12 +1,16 @@
-package com.nhnacademy.springmvcday01.controller;
+package com.nhnacademy.springmvcday02.controller;
 
-import com.nhnacademy.springmvcday01.domain.Student;
-import com.nhnacademy.springmvcday01.repository.StudentRepository;
+import com.nhnacademy.springmvcday02.domain.Student;
+import com.nhnacademy.springmvcday02.exception.StudentNotFoundException;
+import com.nhnacademy.springmvcday02.exception.ValidationFailedException;
+import com.nhnacademy.springmvcday02.repository.StudentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +23,12 @@ public class StudentController {
     public StudentController(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
+    // 여기서 먼저 StudentNotFoundException을 잡음! 여기서 안잡히면 /advice/WebControllerAdvice에서 잡힘.
+    @ExceptionHandler({StudentNotFoundException.class, })
+    public String notFound(StudentNotFoundException ex, Model model){
+        model.addAttribute("exception", ex);
+        return "error";
+    }
 
     @GetMapping("/{studentId}")
     public ModelAndView viewStudent(@PathVariable("studentId") String studentId,
@@ -27,7 +37,7 @@ public class StudentController {
 
         // 세션이 없거나, 세션의 학생 ID가 요청한 ID와 다르면
         if (session == null || !studentId.equals(session.getAttribute("studentId"))) {
-            return new ModelAndView("redirect:/login");
+            throw new StudentNotFoundException("404 error");
         }
 
         Student student = studentRepository.getStudent(studentId);
@@ -43,7 +53,7 @@ public class StudentController {
         HttpSession session = request.getSession(false);
 
         if (session == null || !studentId.equals(session.getAttribute("studentId"))) {
-            return "redirect:/login";
+            throw new StudentNotFoundException("404 error");
         }
 
         Student student = studentRepository.getStudent(studentId);
@@ -53,8 +63,13 @@ public class StudentController {
 
     @PostMapping("/{studentId}/modify")
     public String studentModify(@PathVariable("studentId") String studentId,
-                                @ModelAttribute("student") Student student,
+                                @Valid @ModelAttribute("student") Student student,
+                                BindingResult bindingResult,
                                 HttpServletRequest request){
+        if(bindingResult.hasErrors()){
+            throw new ValidationFailedException(bindingResult);
+        }
+
         HttpSession session = request.getSession(false);
 
         if (session == null || !studentId.equals(session.getAttribute("studentId"))) {

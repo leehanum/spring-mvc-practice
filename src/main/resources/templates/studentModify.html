@@ -6,13 +6,13 @@
 </head>
 <body>
 <form method="post" th:action="@{/student/{id}/modify(id=${student.id})}" th:object="${student}">
-    <span th:text="#{modifyID}"></span> <input type="text" th:field="*{id}" readonly/><br/>
-    <span th:text="#{modifyPassword}"></span><input type="password" th:field="*{password}" required/><br/>
-    <span th:text="#{modifyName}"></span> <input type="text" th:field="*{name}" required/><br/>
-    <span th:text="#{modifyEmail}"></span><input type="email" th:field="*{email}" required/><br/>
-    <span th:text="#{modifyGrade}"></span><input type="number" th:field="*{score}" required/><br/>
-    <span th:text="#{modifyComment}"></span> <textarea th:field="*{comment}" rows="4" cols="50"></textarea><br/>
-  <button type="submit"><span th:text="#{modifySummit}"></span></button>
+    <span th:text="#{ID}"></span> <input type="text" th:field="*{id}" readonly/><br/>
+    <span th:text="#{Password}"></span><input type="password" th:field="*{password}" required/><br/>
+    <span th:text="#{Name}"></span> <input type="text" th:field="*{name}" required/><br/>
+    <span th:text="#{Email}"></span><input type="email" th:field="*{email}" required/><br/>
+    <span th:text="#{Score}"></span><input type="number" th:field="*{score}" required/><br/>
+    <span th:text="#{Comment}"></span> <textarea th:field="*{comment}" rows="4" cols="50"></textarea><br/>
+  <button type="submit"><span th:text="#{Submit}"></span></button>
 </form>
 
 </body>

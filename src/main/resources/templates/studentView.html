@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
 </head>
 <body>
-  <h2>학생 정보 조회</h2>
-  <p><span th:text="#{viewID}"></span> <span th:text="${student.id}"></span></p>
-  <p><span th:text="#{viewMaskedPassword}"></span> <span th:text="${student.maskedPassword}"></span></p>
-  <p><span th:text="#{viewName}"></span> <span th:text="${student.name}"></span></p>
-  <p><span th:text="#{viewEmail}"></span> <span th:text="${student.email}"></span></p>
+  <h2 th:text="#{RegisterButton}">학생 정보 조회</h2> <!-- 임시로 등록 키 사용, 별도 타이틀 필요 시 추가 -->
+  <p><span th:text="#{ID}"></span> <span th:text="${student.id}"></span></p>
+  <p><span th:text="#{MaskedPassword}"></span> <span th:text="${student.maskedPassword}"></span></p>
+  <p><span th:text="#{Name}"></span> <span th:text="${student.name}"></span></p>
+  <p><span th:text="#{Email}"></span> <span th:text="${student.email}"></span></p>
 
   <div th:if="${hideScore != true}">
-    <p><span th:text="#{viewScore}"></span> <span th:text="${student.score}"></span></p>
-    <p><span th:text="#{viewComment}"></span> <span th:text="${student.comment}"></span></p>
+    <p><span th:text="#{Score}"></span> <span th:text="${student.score}"></span></p>
+    <p><span th:text="#{Comment}"></span> <span th:text="${student.comment}"></span></p>
   </div>
 
-  <a th:href="@{/student/{id}/modify(id=${student.id})}"><span th:text="#{viewModify}"></span></a>
-  <a th:href="@{/student/register}"><span th:text="#{viewRegister}"></span></a>
+  <a th:href="@{/student/{id}/modify(id=${student.id})}"><span th:text="#{ModifyButton}"></span></a>
+  <a th:href="@{/student/register}"><span th:text="#{RegisterButton}"></span></a>
 
 </body>
 </html>

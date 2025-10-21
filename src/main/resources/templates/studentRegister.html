@@ -2,30 +2,30 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{viewRegister}"></title> <!-- 타이틀도 등록 키 사용 -->
+    <title th:text="#{RegisterButton}"></title> <!-- 타이틀도 등록 키 사용 -->
 </head>
 <body>
 <form method="post" action="/student/register" th:object="${student}">
     <!-- 아이디 -->
-    <span th:text="#{registerID}"></span> <input type="text" th:field="*{id}"><br/>
+    <span th:text="#{ID}"></span> <input type="text" th:field="*{id}"><br/>
 
     <!-- 비밀번호 (입력 필드이므로, 비밀번호를 나타내는 키를 사용합니다.) -->
-    <span th:text="#{registerPassword}"></span> <input type="password" th:field="*{password}"><br/>
+    <span th:text="#{Password}"></span> <input type="password" th:field="*{password}"><br/>
 
     <!-- 이름 -->
-    <span th:text="#{registerName}"></span> <input type="text" th:field="*{name}"><br/>
+    <span th:text="#{Name}"></span> <input type="text" th:field="*{name}"><br/>
 
     <!-- 이메일 -->
-    <span th:text="#{registerEmail}"></span> <input type="text" th:field="*{email}"><br/>
+    <span th:text="#{Email}"></span> <input type="text" th:field="*{email}"><br/>
 
     <!-- 성적/점수 -->
-    <span th:text="#{registerScore}"></span> <input type="text" th:field="*{score}"><br/>
+    <span th:text="#{Score}"></span> <input type="text" th:field="*{score}"><br/>
 
     <!-- 평가 -->
-    <span th:text="#{registerComment}"></span> <input type="text" th:field="*{comment}"><br/>
+    <span th:text="#{RegisterButton}"></span> <input type="text" th:field="*{comment}"><br/>
 
     <!-- 제출 버튼 (정보 등록) -->
-    <input type="submit" name="registerSubmit" th:value="#{registerSubmit}"/>
+    <input type="submit" name="registerSubmit" th:value="#{RegisterButton}"/>
 
 </form>
 

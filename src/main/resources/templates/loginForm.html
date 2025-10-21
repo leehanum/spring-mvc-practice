@@ -6,10 +6,10 @@
 </head>
 <body>
     <form method="post" action="/login">
-        ID: <input type="text" name="id"/><br/>
-        PWD: <input type="password" name="pwd"/><br/>
+        <span th:text="#{ID}"></span> <input type="text" name="id"/><br/>
+        <span th:text="#{PWD}"></span><input type="password" name="pwd"/><br/>
         <br/>
-        <input type="submit"/>
+        <input type="submit" name="submitButton" th:value="#{loginSubmit}"/>
     </form>
 </body>
 </html>

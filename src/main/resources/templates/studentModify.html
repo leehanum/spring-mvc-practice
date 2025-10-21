@@ -6,13 +6,13 @@
 </head>
 <body>
 <form method="post" th:action="@{/student/{id}/modify(id=${student.id})}" th:object="${student}">
-  아이디: <input type="text" th:field="*{id}" readonly/><br/>
-  비밀번호: <input type="password" th:field="*{password}" required/><br/>
-  이름: <input type="text" th:field="*{name}" required/><br/>
-  이메일: <input type="email" th:field="*{email}" required/><br/>
-  성적: <input type="number" th:field="*{score}" required/><br/>
-  평가: <textarea th:field="*{comment}" rows="4" cols="50"></textarea><br/>
-  <button type="submit">수정 완료</button>
+    <span th:text="#{modifyID}"></span> <input type="text" th:field="*{id}" readonly/><br/>
+    <span th:text="#{modifyPassword}"></span><input type="password" th:field="*{password}" required/><br/>
+    <span th:text="#{modifyName}"></span> <input type="text" th:field="*{name}" required/><br/>
+    <span th:text="#{modifyEmail}"></span><input type="email" th:field="*{email}" required/><br/>
+    <span th:text="#{modifyGrade}"></span><input type="number" th:field="*{score}" required/><br/>
+    <span th:text="#{modifyComment}"></span> <textarea th:field="*{comment}" rows="4" cols="50"></textarea><br/>
+  <button type="submit"><span th:text="#{modifySummit}"></span></button>
 </form>
 
 </body>

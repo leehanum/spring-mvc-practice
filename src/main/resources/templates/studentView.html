@@ -6,18 +6,18 @@
 </head>
 <body>
   <h2>학생 정보 조회</h2>
-  <p><strong>아이디:</strong> <span th:text="${student.id}"></span></p>
-  <p><strong>비밀번호:</strong> <span th:text="${student.maskedPassword}"></span></p>
-  <p><strong>이름:</strong> <span th:text="${student.name}"></span></p>
-  <p><strong>이메일:</strong> <span th:text="${student.email}"></span></p>
+  <p><span th:text="#{viewID}"></span> <span th:text="${student.id}"></span></p>
+  <p><span th:text="#{viewMaskedPassword}"></span> <span th:text="${student.maskedPassword}"></span></p>
+  <p><span th:text="#{viewName}"></span> <span th:text="${student.name}"></span></p>
+  <p><span th:text="#{viewEmail}"></span> <span th:text="${student.email}"></span></p>
 
   <div th:if="${hideScore != true}">
-    <p><strong>성적:</strong> <span th:text="${student.score}"></span></p>
-    <p><strong>평가:</strong> <span th:text="${student.comment}"></span></p>
+    <p><span th:text="#{viewScore}"></span> <span th:text="${student.score}"></span></p>
+    <p><span th:text="#{viewComment}"></span> <span th:text="${student.comment}"></span></p>
   </div>
 
-  <a th:href="@{/student/{id}/modify(id=${student.id})}">정보 수정</a>
-  <a th:href="@{/student/register}">학생 등록</a>
+  <a th:href="@{/student/{id}/modify(id=${student.id})}"><span th:text="#{viewModify}"></span></a>
+  <a th:href="@{/student/register}"><span th:text="#{viewRegister}"></span></a>
 
 </body>
 </html>

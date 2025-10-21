@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +25,7 @@ public class StudentLoginController {
     }
     @GetMapping("/login")
     public String login(HttpServletRequest request, Model model) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false); // 기존 세션만 가져오기
 
         if (Objects.nonNull(session)) {
             String studentId = (String) session.getAttribute("studentId");
@@ -45,13 +43,11 @@ public class StudentLoginController {
     public String doLogin(@RequestParam(name = "id") String id,
                           @RequestParam(name = "pwd") String pwd,
                           HttpServletRequest request,
-                          HttpServletResponse response,
-                          ModelMap modelMap){
+                          HttpServletResponse response){
 
         if(studentRepository.matches(id, pwd)){
             HttpSession session = request.getSession(true);
 
-            // 세션에 학생 ID 저장 (이 부분이 빠져있었습니다!)
             session.setAttribute("studentId", id);
 
             Cookie cookie = new Cookie("SESSION", session.getId());

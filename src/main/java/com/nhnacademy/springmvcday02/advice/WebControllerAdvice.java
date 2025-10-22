@@ -13,7 +13,7 @@ public class WebControllerAdvice {
     @ExceptionHandler(Exception.class)
     public String handleException(Exception ex, Model model){
 //        log.error("",ex);
-        model.addAttribute("exception",ex);
+        model.addAttribute("exception",ex);//
         return "error";
     }
 }

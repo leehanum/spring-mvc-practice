@@ -1,9 +1,9 @@
-package com.nhnacademy.springmvcday02.controller;
+package com.nhnacademy.springmvcday03.controller;
 
-import com.nhnacademy.springmvcday02.domain.Student;
-import com.nhnacademy.springmvcday02.exception.StudentNotFoundException;
-import com.nhnacademy.springmvcday02.exception.ValidationFailedException;
-import com.nhnacademy.springmvcday02.repository.StudentRepository;
+import com.nhnacademy.springmvcday03.domain.Student;
+import com.nhnacademy.springmvcday03.exception.StudentNotFoundException;
+import com.nhnacademy.springmvcday03.exception.ValidationFailedException;
+import com.nhnacademy.springmvcday03.repository.StudentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -35,11 +35,7 @@ public class StudentController {
                                     HttpServletRequest request){
         HttpSession session = request.getSession(false);
 
-        // 세션이 없거나, 세션의 학생 ID가 요청한 ID와 다르면
-        if (session == null || !studentId.equals(session.getAttribute("studentId"))) {
-            throw new StudentNotFoundException("404 error");
-        }
-
+        // LoginCheckInterceptor 적용함. 세션 체크는 LoginCheckInterceptor에서
         Student student = studentRepository.getStudent(studentId);
         ModelAndView studentView = new ModelAndView("studentView");
         studentView.addObject("student", student);
@@ -50,12 +46,6 @@ public class StudentController {
     public String studentModifyForm(@PathVariable("studentId") String studentId,
                                     Model model,
                                     HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-
-        if (session == null || !studentId.equals(session.getAttribute("studentId"))) {
-            throw new StudentNotFoundException("404 error");
-        }
-
         Student student = studentRepository.getStudent(studentId);
         model.addAttribute("student", student);
         return "studentModify";
@@ -69,14 +59,8 @@ public class StudentController {
         if(bindingResult.hasErrors()){
             throw new ValidationFailedException(bindingResult);
         }
-
-        HttpSession session = request.getSession(false);
-
-        if (session == null || !studentId.equals(session.getAttribute("studentId"))) {
-            return "redirect:/login";
-        }
-
         studentRepository.save(student);
         return "redirect:/student/" + studentId;
+
     }
 }

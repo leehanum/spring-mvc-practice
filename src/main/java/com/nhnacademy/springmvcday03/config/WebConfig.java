@@ -1,5 +1,6 @@
-package com.nhnacademy.springmvcday02.config;
+package com.nhnacademy.springmvcday03.config;
 
+import com.nhnacademy.springmvcday03.exception.LoginCheckInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // LocaleChangeInterceptor 적용
         registry.addInterceptor(new LocaleChangeInterceptor());
+        // LoginCheckInterceptor 적용
+        registry.addInterceptor(new LoginCheckInterceptor())
+                // /student/로 시작하는 모든 요청에 대해 인터셉터 적용
+                .addPathPatterns("/student/**")
+                .excludePathPatterns(
+                        "/login",
+                        "/"
+                );
     }
 }

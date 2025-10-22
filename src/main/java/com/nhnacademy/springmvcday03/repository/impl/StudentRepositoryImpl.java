@@ -1,7 +1,7 @@
-package com.nhnacademy.springmvcday02.repository.impl;
+package com.nhnacademy.springmvcday03.repository.impl;
 
-import com.nhnacademy.springmvcday02.domain.Student;
-import com.nhnacademy.springmvcday02.repository.StudentRepository;
+import com.nhnacademy.springmvcday03.domain.Student;
+import com.nhnacademy.springmvcday03.repository.StudentRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

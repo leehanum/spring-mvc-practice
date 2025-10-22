@@ -1,7 +1,7 @@
-package com.nhnacademy.springmvcday02.repository;
+package com.nhnacademy.springmvcday03.repository;
 
 
-import com.nhnacademy.springmvcday02.domain.Student;
+import com.nhnacademy.springmvcday03.domain.Student;
 
 public interface StudentRepository {
     boolean exists(String id);

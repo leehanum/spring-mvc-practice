@@ -1,7 +1,7 @@
-package com.nhnacademy.springmvcday02.controller;
+package com.nhnacademy.springmvcday03.controller;
 
 
-import com.nhnacademy.springmvcday02.repository.StudentRepository;
+import com.nhnacademy.springmvcday03.repository.StudentRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -37,6 +37,7 @@ public class StudentLoginController {
             }
         }
 
+
         return "loginForm";
     }
 
@@ -48,9 +49,7 @@ public class StudentLoginController {
 
         if(studentRepository.matches(id, pwd)){
             HttpSession session = request.getSession(true); // 1. 세션 생성
-
             session.setAttribute("studentId", id); // 2. 세션에 학생 ID를 저장
-
             Cookie cookie = new Cookie("SESSION", session.getId());// SESSION 이라는 쿠키 이름과, session.getId() 를 저장
             response.addCookie(cookie); // 응답 요청에 위 쿠키를 추가
 
@@ -58,5 +57,20 @@ public class StudentLoginController {
         } else {
             return "redirect:/login";
         }
+    }
+
+    @GetMapping("/logout")
+    public String doLogout(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session = request.getSession(false);
+
+        session.invalidate(); // 세션 무효화
+        Cookie cookie = new Cookie("SESSION", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "redirect:/login";
+
+
     }
 }

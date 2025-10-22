@@ -1,4 +1,4 @@
-package com.nhnacademy.springmvcday02.exception;
+package com.nhnacademy.springmvcday03.exception;
 
 import org.springframework.validation.BindingResult;
 

@@ -19,5 +19,6 @@
   <a th:href="@{/student/{id}/modify(id=${student.id})}"><span th:text="#{ModifyButton}"></span></a>
   <a th:href="@{/student/register}"><span th:text="#{RegisterButton}"></span></a>
 
+  <form method="get" action="/logout" style="display:inline;"><button type="submit">로그아웃</button></form>
 </body>
 </html>

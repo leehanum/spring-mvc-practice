@@ -1,9 +1,8 @@
-package com.nhnacademy.springmvcday02.domain;
+package com.nhnacademy.springmvcday03.domain;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter

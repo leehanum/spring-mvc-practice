@@ -1,8 +1,8 @@
-package com.nhnacademy.springmvcday02.controller;
+package com.nhnacademy.springmvcday03.controller;
 
-import com.nhnacademy.springmvcday02.domain.Student;
-import com.nhnacademy.springmvcday02.exception.ValidationFailedException;
-import com.nhnacademy.springmvcday02.repository.StudentRepository;
+import com.nhnacademy.springmvcday03.domain.Student;
+import com.nhnacademy.springmvcday03.exception.ValidationFailedException;
+import com.nhnacademy.springmvcday03.repository.StudentRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -39,12 +39,12 @@ public class StudentRegisterController {
         if(Objects.nonNull(session)){
             String studentId = (String) session.getAttribute("studentId");
 
-
             if (Objects.nonNull(studentId) && studentRepository.exists(studentId)) {
                 return "studentRegister";
             }
         }
         return "loginForm";
+//        return "studentRegister";
     }
 
     @PostMapping

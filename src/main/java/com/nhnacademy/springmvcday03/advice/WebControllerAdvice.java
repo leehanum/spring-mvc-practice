@@ -1,4 +1,4 @@
-package com.nhnacademy.springmvcday02.advice;
+package com.nhnacademy.springmvcday03.advice;
 
 
 import lombok.extern.slf4j.Slf4j;
